@@ -1,0 +1,76 @@
+.verify{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.head{
+    text-align: center;
+    font-size: 40px;
+    color:rgb(21, 138, 99);
+}
+.input{
+    height:50px;
+    margin:25px;
+    width:60vw;
+    border:2px solid orange;
+    border-radius: 30px;
+    font-size: 20px;
+    text-align: center;
+}
+.bill{
+    color:crimson;
+    border:3px solid orange;
+    border-radius:20px;
+    word-break: break-all;
+    box-shadow:8px 8px 8px  grey;
+    margin-bottom:20px
+}
+.loader>div{
+    font-size:30px;
+    text-align:center;
+    color:rgb(54, 52, 52);
+}
+.button{
+    font-size: 25px;
+    width:100px;
+    height:50px;
+    margin:20px;
+    border:2px solid orange;
+    text-align: center;
+    border-radius:110px;
+    padding-top:6px;
+    color:white;
+    background: rgb(21, 138, 99);
+    font-weight: bold;
+    font-family: sans-serif;
+    box-shadow:4px 4px 6px grey
+}
+.bill{
+    width:80vw;
+}
+.data{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px solid orange;
+    font-size: 30px;
+    border-radius:20px;
+}
+.data>div:first-child{
+    color:rgb(21, 138, 99);
+    width:50vw;
+}
+@media only screen and (max-width: 500px){
+    .input{
+        width: 95vw;
+    }
+    .head{
+        font-size: 30px;
+    }
+    .bill{
+         width:100vw;
+    }
+    .data>div{
+        font-size: 20px;
+    }
+}
