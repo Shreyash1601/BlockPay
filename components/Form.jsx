@@ -29,7 +29,7 @@ const Form=()=>{
         if(display2==="none")
         setDisplay2("inline")
         try{
-            const res=await fetch("http://localhost:5000/ipfs",{
+            const res=await fetch("https://block-pay-backend.onrender.com/ipfs",{
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json",
