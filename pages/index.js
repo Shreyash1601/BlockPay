@@ -3,7 +3,6 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Navbar from '../components/Navbar'
 import Form from '../components/Form'
-import Verify from '../components/Verify'
 export default function Home() {
   return (
     <div className={styles.container}>
@@ -13,6 +12,8 @@ export default function Home() {
         <link rel="icon" href="/Block Pay.jpeg" />
       </Head>
       <h1 className="welcome">Welcome to Block Pay</h1>
+      <Navbar/>
+      <Form/>
     </div>
   )
 }

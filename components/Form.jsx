@@ -68,9 +68,6 @@ const Form=()=>{
         <input onChange={handleInput}name="PPrice" value={bill.PPrice} type="text" placeholder='Enter Product Price' className={styles.field}/>
         </div>
         <div>
-        <input onChange={handleInput}name="PPrice" value={bill.IMEI} type="text" placeholder='Enter IMEI number of Phone' className={styles.field}/>
-        </div>
-        <div>
         <input onChange={handleInput}name="Aadhar" value={bill.Aadhar}type="text" placeholder='Enter Aadhar Card of Owner'className={styles.field}/>
         </div>
         <div>
