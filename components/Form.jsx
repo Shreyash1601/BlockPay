@@ -1,10 +1,13 @@
 import styles from '../styles/Form.module.css'
 import {useState} from 'react';
+import { QrReader } from 'react-qr-reader';
+
 import loader from '../public/loading.gif'
 import Image from 'next/image'
 const Form=()=>{
     const [hash,setHash]=useState(null)
     const [display,setDisplay]=useState("none")
+    const [QR,setQR]=useState("none")
     const [display2,setDisplay2]=useState("none")
     const [bill,setBill]=useState({
         PName:"",
@@ -15,9 +18,12 @@ const Form=()=>{
         DOM:"",
         DOP:"",
         LTS:"",
-        IMEI:"",
         Servicing:""
     })
+    const ChangeQR=()=>{
+        if(QR==="none") setQR("block")
+        else setQR("none")
+    }
     const handleInput=(e)=>{
         const name=e.target.name;
         const val=e.target.value;
@@ -29,7 +35,7 @@ const Form=()=>{
         if(display2==="none")
         setDisplay2("inline")
         try{
-            const res=await fetch("https://block-pay-backend.onrender.com/ipfs",{
+            const res=await fetch("http://localhost:5000/ipfs",{
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json",
@@ -38,7 +44,7 @@ const Form=()=>{
                 body:JSON.stringify(bill)
             })
             const result=await res.json();
-    
+            
             if(res.status>=400 ||!result){
                 window.alert("Error occurred at IPFS server")
             }
@@ -48,6 +54,7 @@ const Form=()=>{
                 setHash(result.data)
                 if(display==="none") setDisplay("block")
             }
+            
         }
         catch(err){
             console.log(err)
@@ -56,6 +63,27 @@ const Form=()=>{
     }
     return(
         <>
+        <div style={{display:QR}}>
+         <QrReader
+        onResult={(result, error) => {
+          if (result) {
+              console.log(result.text)
+            setBill((prev)=>{
+            return {
+                ...prev,
+                ...JSON.parse(result.text)
+            }
+          })
+          setQR("none")}
+          if (error) {
+            console.log(error);
+          }}}
+        
+      />
+      </div>
+       <div onClick={ChangeQR} style={{background:loader}}className={styles.button}>
+        Scan QR code
+        </div>
         <div className={styles.Form}>
         <form>
         <div className={styles.list}>
@@ -64,6 +92,7 @@ const Form=()=>{
         <div>
         <input onChange={handleInput}name="PName" value={bill.PName}type="text" placeholder='Enter Product Name' className={styles.field}/>
         </div>
+        
         <div>
         <input onChange={handleInput}name="PPrice" value={bill.PPrice} type="text" placeholder='Enter Product Price' className={styles.field}/>
         </div>

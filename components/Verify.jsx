@@ -9,15 +9,15 @@ const Verify=()=>{
     const [disp1,setDisp1]=useState("none")
     const [CID,setCID]=useState("")
     const [bill,setBill]=useState({
-        PName:"",
-        PPrice:"",
-        IMEI:"",
+        PName:"Vivo V11",
+        PPrice:"30000",
+        IMEI:"IMEI98765",
         email:"",
         Aadhar:"",
-        DOM:"",
+        DOM:"20 Aug 2021",
         DOP:"",
-        LTS:"",
-        Servicing:""
+        LTS:"29 Sep 2021",
+        Servicing:"Not Applicable"
     });
     const handleInput=(e)=>{
         setCID(e.target.value)
@@ -27,22 +27,26 @@ const Verify=()=>{
         e.preventDefault()
         if(disp!="none") setDisp("none")
         try{
-        const res=await fetch(`https://gateway.ipfs.io/ipfs/${CID}`,{
-            method:"GET"
+        const res=await fetch(`http://localhost:5000/data`,{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json",
+                "Access-Control-Allow-Origin":"*"
+            },
+            body:JSON.stringify({"CID":CID})
         })
         const result=await res.json();
         if(result.status>=400) window.alert("Error")
         else{
-        console.log(result)
-        setBill(result)
+        console.log(result.data)
+        setBill(result.data)
         setDisp1("none")
         setDisp("block")
         }
         }catch(err){
-        setDisp("none");
+        setDisp("block");
         setDisp1("none")
         console.log(err)
-        window.alert("Some Error Occured")
         }
     setDisp1("none")
     }
